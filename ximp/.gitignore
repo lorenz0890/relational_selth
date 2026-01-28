@@ -1,0 +1,28 @@
+# Jetbrain IDE
+.idea/
+
+# VSCode
+.vscode/
+
+# MacOS Specifics
+.DS_Store
+
+.ruff_cache
+
+# models
+models/
+
+__pycache__
+
+# Ignore the processed dataset files
+/data/polaris/admet/processed
+/data/polaris/potency/processed
+
+# Ignore MoleculeNet dataset files
+/data/molecule_net
+
+# Ignore results files, but not directories
+/results/*
+!/results/**/
+
+results_tmp/

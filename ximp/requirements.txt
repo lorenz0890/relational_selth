@@ -1,0 +1,14 @@
+# XIMP Dependencies for venv
+torch==2.6.0
+scipy==1.16.0
+rdkit==2024.9.5
+tqdm==4.67.1
+matplotlib==3.10.0
+pandas==2.2.3
+seaborn==0.13.2
+pyyaml==6.0.2
+scikit-learn==1.6.1
+jupyter
+torch-geometric==2.6.1
+torch-scatter
+torch-sparse
