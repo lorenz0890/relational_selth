@@ -15,8 +15,8 @@ class LinkPrediction(Module):
 
     def __init__(self, embedding_size: int):
         super().__init__()
-        self.hidden = Linear(2 * embedding_size, HIDDEN, bias=False) #Lorenz: deactivated bias
-        self.output = Linear(HIDDEN, 1, bias=False) #Lorenz: deactivated bias
+        self.hidden = Linear(2 * embedding_size, HIDDEN, bias=False) #LK: deactivated bias
+        self.output = Linear(HIDDEN, 1, bias=False) #LK: deactivated bias
 
     def forward(self, h_u: Tensor, h_v: Tensor) -> Tensor:
         h = torch.cat((h_u, h_v), 1)
@@ -33,8 +33,8 @@ class NodePrediction(Module):
 
     def __init__(self, embedding_size: int, out_size: int):
         super().__init__()
-        self.hidden = Linear(embedding_size, HIDDEN, bias=False) #Lorenz: deactivated bias
-        self.output = Linear(HIDDEN, out_size, bias=False) #Lorenz: deactivated bias
+        self.hidden = Linear(embedding_size, HIDDEN, bias=False) #LK: deactivated bias
+        self.output = Linear(HIDDEN, out_size, bias=False) #LK: deactivated bias
 
     def forward(self, h: Tensor) -> Tensor:
         return self.output(torch.relu(self.hidden(h))).squeeze()
@@ -59,10 +59,10 @@ class T12(Module):
         _ = total_events
         self.agg_features = previous_embed_size + 1
         self.register_buffer('zeros', torch.zeros(total_nodes, self.agg_features), persistent=False)
-        self.bn = BatchNorm1d(self.agg_features, affine=False) #Lorenz: deactivated affine transformation
-        self.w1 = Linear(self.agg_features, self.agg_features, bias=False) #Lorenz: deactivated bias
+        self.bn = BatchNorm1d(self.agg_features, affine=False) #LK: deactivated affine transformation
+        self.w1 = Linear(self.agg_features, self.agg_features, bias=False) #LK: deactivated bias
         out_size = self.agg_features + previous_embed_size
-        self.w2 = Linear(out_size, out_size, bias=False) #Lorenz: deactivated bias
+        self.w2 = Linear(out_size, out_size, bias=False) #LK: deactivated bias
 
     def after_aggregation(self, h: Tensor, agg: Tensor) -> Tensor:
         return self.w2(torch.cat((h, torch.relu(self.w1(self.bn(agg)))), 1))

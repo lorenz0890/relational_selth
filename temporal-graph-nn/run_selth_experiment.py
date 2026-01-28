@@ -106,7 +106,7 @@ def run_experiment(config: ExperimentConfig) -> Dict[str, Any]:
     np.random.seed(config.seed)
 
     # Set EMBED dimension
-    hyper.EMBED = config.embed_dim # Lorenz: This doesnt work. Always uses 32 from the file...
+    hyper.EMBED = config.embed_dim # LK: This doesnt work. Always uses 32 from the file...
 
     # Set batch size if provided (override default)
     if config.batch_size is not None:
