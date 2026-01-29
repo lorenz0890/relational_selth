@@ -41,7 +41,7 @@ for run_dir, files in runs.items():
             with fp.open("r", encoding="utf-8") as f:
                 obj = json.load(f)
 
-            # If a JSON is a list (rare for your case), store it under a key derived from filename
+            # If a JSON is a list store it under a key derived from filename
             # rather than exploding into many rows.
             if isinstance(obj, list):
                 obj = {fp.stem: obj}
@@ -108,7 +108,7 @@ for run_dir, files in runs.items():
             with fp.open("r", encoding="utf-8") as f:
                 obj = json.load(f)
 
-            # If a JSON is a list (rare for your case), store it under a key derived from filename
+            # If a JSON is a list, store it under a key derived from filename
             # rather than exploding into many rows.
             if isinstance(obj, list):
                 obj = {fp.stem: obj}
@@ -178,7 +178,7 @@ def minmax_01(s: pd.Series, higher_is_better: bool = True, eps: float = 0.0) -> 
     return eps + (1 - eps) * norm
 
 
-EPS = 0.0   # use 0.1 if you literally want [0.1, 1]
+EPS = 0.0 
 
 # df_a: NDCG (higher is better) — per dataset
 df_a["test_performance"] = (
@@ -226,7 +226,7 @@ plt.rcParams.update({
 
 alpha_sig = 0.05
 
-# 3 pairwise correlations you asked for:
+# 3 pairwise correlations:
 pairs = [
     ("sep", "test_performance"),
     ("sep", "compression"),
@@ -336,7 +336,7 @@ model_handles = [
     for m in models
 ]
 
-# Put legends to the right; adjust if you have many models
+# Put legends to the right; adjust for many models
 fig.subplots_adjust(right=0.72)
 
 leg1 = ax.legend(
@@ -384,7 +384,7 @@ def conditional_prob_per_model(
     dense  = df[df[prune_col] == dense_value].copy()
     pruned = df[df[prune_col].apply(pruned_condition)].copy()
 
-    # baseline dense performance per model (model already includes dataset in your df)
+    # baseline dense performance per model (model already includes dataset in df)
     dense_base = (
         dense.groupby([model_col], dropna=False)[perf_col]
              .mean()
@@ -444,7 +444,7 @@ plt.rcParams.update({
 alpha_sig = 0.05
 
 # =========================================================
-# (A) LEFT PANEL: volcano correlations per model (your code)
+# (A) LEFT PANEL: volcano correlations per model
 # =========================================================
 pairs = [
     ("sep", "test_performance"),
@@ -515,8 +515,8 @@ tmp["sep_mid"] = 0.5 * (tmp["sep_min"] + tmp["sep_max"])
 # optional: drop empty bins
 tmp = tmp[tmp["n"] > 0].copy()
 
-# (optional) size encode sample count (keeps your style but adds information)
-# If you want fixed size, just set size = S.
+# (optional) size encode sample count (keeps style but adds information)
+# for fixed size, just set size = S.
 nmax = max(1, int(tmp["n"].max() if len(tmp) else 1))
 def size_from_n(n):
     # map n in [1,nmax] -> [0.7S, 1.3S]
@@ -527,7 +527,7 @@ def size_from_n(n):
 # =========================================================
 fig, (ax1, ax2) = plt.subplots(
     1, 2,
-    figsize=(7.1, 1.7),   # adjust if you need more height
+    figsize=(7.1, 1.7),   # adjust for more height
     constrained_layout=True,
     gridspec_kw={"width_ratios": [1.0, 1.0],
                  "wspace": 0.56 #54
@@ -559,7 +559,7 @@ ax1.grid(True, linestyle="-", linewidth=GRID_LW, alpha=0.25)
 ax1.set_axisbelow(True)
 ax1.set_xlim(-1.05, 1.05)
 
-# your log-y look
+# log-y look
 ax1.set_yscale("log")
 ax1.set_ylim(7e-1, 1e2 + 1000)
 

@@ -20,7 +20,7 @@ plt.rcParams.update({
 })
 s_mid = 2
 
-# ----------------- Fallbacks for required constants (keeps your session if already defined) -----------------
+# ----------------- Fallbacks for required constants (overriden where necessary) -----------------
 
 L_fixed = 5
 B_default_r = 4
@@ -119,7 +119,7 @@ csA = axA.contour(
 #    t.set_rotation(0)
 #    t.set_rotation_mode('anchor')
 
-# choose (N_max, m_min) positions where you want each label to appear
+# choose (N_max, m_min) positions where for label bars
 manual_pos_A = [
     (1e2, 31),
     (1e3, 36),
@@ -128,7 +128,6 @@ manual_pos_A = [
     (1e4+500, 51),
     (1e5, 56),
     (1e5+500, 61),
-    # add as many as you want
 ]
 
 def sci_times10(v):

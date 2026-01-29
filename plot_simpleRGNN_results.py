@@ -345,9 +345,6 @@ for rho in rhos:
 # ============================================================
 # Compare empirical pruning success vs gamma lower bound
 # (NO-TRAINING baseline: random-init model)
-# Assumes in your notebook:
-#   - graphs, rand_model, rhos, empirical_success_probability(...) already exist
-#   - gamma_rgnn_lower_bound(...) is defined (your provided code)
 # ============================================================
 
 
@@ -516,7 +513,7 @@ gam_plot = np.maximum(np.array(gamma_vals, dtype=float), 1e-12)
 
 # -----------------------------
 # Trainable TinyRGNN + classifier head
-# (matches your "sum aggregate + sum combine + tanh" design)
+# (matches "sum aggregate + sum combine + tanh" design)
 # -----------------------------
 class TrainableTinyRGNN(nn.Module):
     def __init__(self, in_dim: int, hidden_dim: int, num_relations: int, num_layers: int):
@@ -652,7 +649,7 @@ def train_one_run(
     num_classes = len(graphs)
     y = torch.arange(num_classes, device=device)
 
-    # build model with deterministic init (so only mask varies if you vary seed_mask)
+    # build model with deterministic init (so only mask varies if varied seed_mask)
     torch.manual_seed(seed_model)
     num_relations = len(graphs[0].edge_index_by_rel)
     in_dim = 1 + num_relations
@@ -771,7 +768,7 @@ def run_experiments(
 
 
 # -----------------------------
-# Example call (edit to your liking)
+# Example call
 # -----------------------------
 df = run_experiments(
      graphs,
