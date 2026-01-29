@@ -12,6 +12,11 @@ plt.rcParams.update({
     "xtick.labelsize": 13,    # tick labels
     "ytick.labelsize": 13,
     "legend.fontsize": 13,
+    
+    # Typography
+    "font.family": "serif",
+    "font.serif": ["Times New Roman", "Times", "STIXGeneral", "DejaVu Serif"],
+    "mathtext.fontset": "stix",
 })
 s_mid = 2
 
@@ -109,10 +114,41 @@ csA = axA.contour(
     levels=levels_eff_A, colors="black", linewidths=1.2
 )
 # horizontal labels for efficiency contours
-textsA = axA.clabel(csA, fmt=lambda v: f"{v:.1e}", inline=False, fontsize=11)
+#textsA = axA.clabel(csA, fmt=lambda v: f"{v:.1e}", inline=False, fontsize=11)
+#for t in textsA:
+#    t.set_rotation(0)
+#    t.set_rotation_mode('anchor')
+
+# choose (N_max, m_min) positions where you want each label to appear
+manual_pos_A = [
+    (1e2, 31),
+    (1e3, 36),
+    (1e3+500, 41),
+    (1e4, 46),
+    (1e4+500, 51),
+    (1e5, 56),
+    (1e5+500, 61),
+    # add as many as you want
+]
+
+def sci_times10(v):
+    s = f"{v:.1e}"          # e.g. "2.4e-07"
+    mant, exp = s.split("e")
+    exp = int(exp)          # -7
+    return rf"${mant}\cdot 10^{{{exp}}}$"
+
+textsA = axA.clabel(
+    csA,
+    fmt=sci_times10,
+    inline=True,
+    fontsize=11,
+    manual=manual_pos_A
+)
+
+
 for t in textsA:
-    t.set_rotation(0)
-    t.set_rotation_mode('anchor')
+    t.set_rotation(-75)
+    t.set_rotation_mode("anchor")
 
 #axA.set_title(rf"γ-efficiency (ρ={rho_mid:.2f})")
 axA.set_title("(a)")
@@ -246,12 +282,20 @@ smA.set_array([])
 cbarA = fig.colorbar(smA, cax=caxA)
 cbarA.set_label(r"$\gamma_{\mathrm{RGNN}}$", fontsize=12)
 
+from matplotlib.ticker import FixedLocator, FixedFormatter
+# --- cosmetic: show only 0 and 1 (no 0.5) ---
+cbarA.set_ticks([0.0, 1.0])
+cbarA.ax.yaxis.set_major_locator(FixedLocator([0.0, 1.0]))
+cbarA.ax.yaxis.set_major_formatter(FixedFormatter(["0", "1"]))
+# -------------------------------------------
+
 caxC = fig.add_axes([0.935, 0.13, 0.012, 0.33])
 smC = cm.ScalarMappable(
     norm=Normalize(vmin=madds_grid_C.min(), vmax=madds_grid_C.max()),
     cmap=cmapC
 )
 smC.set_array([])
+
 cbarC = fig.colorbar(smC, cax=caxC)
 cbarC.set_label("MADDS (est.)", fontsize=12)
 
