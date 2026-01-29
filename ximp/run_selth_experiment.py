@@ -93,9 +93,9 @@ class SELTHXIMPExperiment:
                 root=f"./data/polaris/{self.params['task']}/",
                 task=self.params["task"],
                 target_task=self.params["target_task"],
-                use_erg=self.params["use_erg"], #Lorenz: we need to pass these variables
-                use_jt=self.params["use_jt"], #Lorenz: we need to pass these variables
-                jt_coarsity = self.params["jt_coarsity"], #Lorenz: we need to pass these variables
+                use_erg=self.params["use_erg"], #we need to pass these variables
+                use_jt=self.params["use_jt"], #we need to pass these variables
+                jt_coarsity = self.params["jt_coarsity"], #we need to pass these variables
 
             )
         elif self.params["task"] == "admet":
@@ -103,9 +103,9 @@ class SELTHXIMPExperiment:
                 root="./data/polaris/admet/",
                 task=self.params["task"],
                 target_task=self.params["target_task"],
-                use_erg=self.params["use_erg"], #Lorenz: we need to pass these variables
-                use_jt=self.params["use_jt"], #Lorenz: we need to pass these variables
-                jt_coarsity = self.params["jt_coarsity"], #Lorenz: we need to pass these variables
+                use_erg=self.params["use_erg"], #we need to pass these variables
+                use_jt=self.params["use_jt"], #we need to pass these variables
+                jt_coarsity = self.params["jt_coarsity"], #we need to pass these variables
             )
         else:
             dataset_wrapper = MoleculeNetDataset(
@@ -202,9 +202,9 @@ class SELTHXIMPExperiment:
         total = len(all_embeddings)
 
         metrics = {
-            #'seperable_final_embeddings': seperable_final_embeddings, #Lorenz: i renamed N for something more correct, N was not the same as in the temporal setting
+            #'seperable_final_embeddings': seperable_final_embeddings, # i renamed N for something more correct, N was not the same as in the temporal setting
             #'total_graphs': total,
-            'seperable_final_embeddings_ratio': seperable_final_embeddings / total if total > 0 else 0.0, #Lorenz: i renamed uniqueness_ratio for something more correct, N was not the same as in the temporal setting
+            'seperable_final_embeddings_ratio': seperable_final_embeddings / total if total > 0 else 0.0, # i renamed uniqueness_ratio for something more correct, N was not the same as in the temporal setting
             #'embedding_dim': all_embeddings.shape[1],
             #'S_min': S_min, #These are all computed incorrectly
             #'S_mean': S_mean,
@@ -226,7 +226,7 @@ class SELTHXIMPExperiment:
         self._init_model()
 
         # Create dataloader for expressivity measurement
-        expressivity_eval_dataloader = DataLoader( #Lorenz: Renamed this for clarity
+        expressivity_eval_dataloader = DataLoader( # Renamed this for clarity
             self.dataset,
             batch_size=self.params['batch_size'],
             shuffle=False

@@ -309,7 +309,7 @@ class ProjectionHead(nn.Module):
     def __init__(self, in_dim, out_dim, hidden_dim):
         super().__init__()
         self.projection = nn.Sequential(
-            nn.Linear(in_dim, hidden_dim, bias=False), #Lorenz: deactivated bias
+            nn.Linear(in_dim, hidden_dim, bias=False), #deactivated bias
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim, bias=False),
             nn.ReLU(),

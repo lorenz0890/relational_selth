@@ -14,7 +14,7 @@ PY
 
 Y_VALUES=(T2 T1)
 Z_VALUES=(561 1105 1729 2465 2821) # 6601 8911 10585 15841 29341) #Carmichael numbers #(3 5 17 257 65537) # Fermat numbers
-D_VALUES=(16) #This wont be used bc of a bug in the codebase (it's set in hyper), but kept for consistency. Marco should fix it.
+D_VALUES=(16) #This wont be used bc of a bug in the codebase (it's set in hyper.py), but kept for consistency.
 
 # ---- Progress bookkeeping ----
 total=$(( ${#X_VALUES[@]} * ${#Y_VALUES[@]} * ${#Z_VALUES[@]} * ${#D_VALUES[@]} ))
