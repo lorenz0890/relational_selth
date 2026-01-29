@@ -1,18 +1,3 @@
-# ============================================================
-# NO-TRAINING BASELINE (self-contained):
-# Random-init tiny RGNN + random Bernoulli pruning
-# Success criterion: all graph embeddings are pairwise distinct
-# ============================================================
-# This cell includes EVERYTHING it needs:
-# - toy multi-relational dataset generator
-# - tiny RGNN definition
-# - pruning routine
-# - embedding-distinctness success test
-# - rho sweep + plot + table
-#
-# Dependencies: numpy, torch, matplotlib, pandas
-# ------------------------------------------------------------
-
 import random
 from dataclasses import dataclass
 from typing import List, Tuple, Dict, Optional
